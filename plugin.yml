@@ -1,0 +1,15 @@
+name: EasyGamemode
+version: 1.0.0
+main: EasyGamemode\Main
+api: 5.0.0
+author: ByEvidencias
+commands:
+  gm:
+    description: Change your game mode easier!
+    usage: /gm <mode> [player]
+    permission: easygamemode.use
+permissions:
+  easygamemode.use:
+    description: Allows change the game mode.
+    default: op
+    
