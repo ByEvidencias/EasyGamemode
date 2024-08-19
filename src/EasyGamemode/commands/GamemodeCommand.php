@@ -15,7 +15,7 @@ class GamemodeCommand extends Command {
     private PluginBase $plugin;
 
     public function __construct(PluginBase $plugin) {
-        parent::__construct("gm", "Change your game mode easier.", "/gm <mode> [player]");
+        parent::__construct("gm", "Change your game mode easier.", "/gm <mode> [player]", ["egm"]);
         $this->setPermission("easygamemode.use");
         $this->plugin = $plugin;
     }
