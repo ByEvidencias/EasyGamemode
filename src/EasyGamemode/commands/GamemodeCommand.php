@@ -6,18 +6,16 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
-use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
 use pocketmine\utils\TextFormat as TF;
+use EasyGamemode\utils\SingletonTrait;
 
 class GamemodeCommand extends Command {
 
-    private PluginBase $plugin;
+    use SingletonTrait;
 
-    public function __construct(PluginBase $plugin) {
+    public function __construct() {
         parent::__construct("gm", "Change your game mode easier.", "/gm <mode> [player]", ["egm"]);
         $this->setPermission("easygamemode.use");
-        $this->plugin = $plugin;
     }
 
     public function execute(CommandSender $sender, string $label, array $args): void {
@@ -40,7 +38,7 @@ class GamemodeCommand extends Command {
         $targetPlayer = $sender;
 
         if (count($args) === 2) {
-            $targetPlayer = $this->plugin->getServer()->getPlayerByPrefix($args[1]);
+            $targetPlayer = self::getInstance()->getServer()->getPlayerByPrefix($args[1]);
             if ($targetPlayer === null) {
                 $sender->sendMessage(TF::RED . "Player not found.");
                 return;
@@ -86,9 +84,5 @@ class GamemodeCommand extends Command {
                 $sender->sendMessage(TF::GREEN . "Game mode of " . $targetPlayer->getName() . " changed to $gamemodeName.");
             }
         }
-    }
-
-    public function getPlugin(): PluginBase {
-        return $this->plugin;
     }
 }
